@@ -87,4 +87,4 @@ def api2(methods=['GET']):
 #     return render_template('index.html', name=class_name, result=result_name, precision=class_precision)
 
 if __name__ == '__main__':
-    app.run(ssl_context='adhoc')
+    app.run()
