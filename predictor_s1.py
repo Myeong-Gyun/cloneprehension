@@ -94,6 +94,7 @@ def deploy():
     pred = model.predict(input_scaled)
     result_class = pred.argmax(axis=-1)[0]
     result_score = round(pred[0][result_class] * 100, 2)
+    print(result_class)
 
-    return(result_class, result_score)
+    return(result_class, result_score, final_list[0])
     

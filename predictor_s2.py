@@ -50,6 +50,7 @@ def deploy():
     MSE = round(float(data_t[2]),2)
     PIR = int(data_t[6])
     Radar = int(data_t[5])
+    time = data_t[1]
 
     final_list = [SSIM_1, log_Sound, MSE, PIR, Radar]
     print("Final List: ", final_list)
@@ -95,5 +96,5 @@ def deploy():
     result_class = pred.argmax(axis=-1)[0]
     result_score = round(pred[0][result_class] * 100, 2)
 
-    return(result_class, result_score)
+    return(result_class, result_score, time)
     
