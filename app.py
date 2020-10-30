@@ -6,7 +6,7 @@ import random
 
 
 # import predictor_s1, predictor2, predictor3 
-import predictor_s1, predictor_s2
+import predictor_s1, predictor_s2, predictor_s3
 
 app = Flask(__name__)
 CORS(app)
@@ -50,15 +50,23 @@ def hello():
 def api():
     class_name_1, class_precision_1, fl = predictor_s1.deploy()
     class_name_2, class_precision_2, time = predictor_s2.deploy()
+    class_name_3, class_precision_3, time = predictor_s3.deploy()
     nop_1 = str(class_name_1)
     pre_1 = str(class_precision_1)
     nop_2 = str(class_name_2)
     pre_2 = str(class_precision_2)
+    nop_3 = str(class_name_3)
+    pre_3 = str(class_precision_3)
     fl = str(fl)
     time = str(time)
     
 
-    sensor = [{"id" : "10", "nop": nop_1, "precision": pre_1},{"id" : "12", "nop": nop_2, "precision": pre_2},{"test":time}]
+    sensor = [
+        {"id" : "10", "nop": nop_1, "precision": pre_1},
+        {"id" : "12", "nop": nop_2, "precision": pre_2},
+        {"id" : "11", "nop": nop_3, "precision": pre_3},
+        {"test":time}
+        ]
 
     return jsonify(sensor)
 
