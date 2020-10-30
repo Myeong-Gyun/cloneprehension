@@ -10,9 +10,17 @@ app = Flask(__name__)
 
 # just in case...
 @app.route('/')
-def hello():
-    return "Hello World!"
+def api():
+    class_name_1, class_precision_1 = predictor_s1.deploy()
+    class_name_2, class_precision_2 = predictor_s2.deploy()
+    nop_1 = str(class_name_1)
+    pre_1 = str(class_precision_1)
+    nop_2 = str(class_name_2)
+    pre_2 = str(class_precision_2)
 
+    sensor = {"nop_1": nop_1, "precision_1": pre_1,
+              "nop_2": nop_2, "precision_2": pre_2}
+    return jsonify(sensor)
 # @app.route('/dashboard1')
 # def dashboard1():
 #     # class name = NoP
@@ -43,18 +51,18 @@ def hello():
 ######json data for react ######
 
 
-@app.route('/api')
-def api():
-    class_name_1, class_precision_1 = predictor_s1.deploy()
-    class_name_2, class_precision_2 = predictor_s2.deploy()
-    nop_1 = str(class_name_1)
-    pre_1 = str(class_precision_1)
-    nop_2 = str(class_name_2)
-    pre_2 = str(class_precision_2)
+# @app.route('/api')
+# def api():
+#     class_name_1, class_precision_1 = predictor_s1.deploy()
+#     class_name_2, class_precision_2 = predictor_s2.deploy()
+#     nop_1 = str(class_name_1)
+#     pre_1 = str(class_precision_1)
+#     nop_2 = str(class_name_2)
+#     pre_2 = str(class_precision_2)
 
-    sensor = {"nop_1": nop_1, "precision_1": pre_1,
-              "nop_2": nop_2, "precision_2": pre_2}
-    return jsonify(sensor)
+#     sensor = {"nop_1": nop_1, "precision_1": pre_1,
+#               "nop_2": nop_2, "precision_2": pre_2}
+#     return jsonify(sensor)
 
 
 # @app.route('/api2')
