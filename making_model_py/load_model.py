@@ -15,34 +15,18 @@ from math import sqrt
 
 # %%
 # Load dataset.
-df = pd.read_csv('data/sensor_sampled_ma-2020-08-25T07-49-22.611Z.csv')
-df.head()
+df_raw = pd.read_csv('data/sensor_sampled_ma-2020-08-25T07-49-22.611Z.csv')
+df_raw.head()
 
 # %%
 # drop unused columns in dataframe
-df.drop(columns=['Date', 'Time', 'Cam'], inplace=True)
-df.columns
-
-# %%
-# need to change 'n' into 2 and make categories as 'int' type for classification
-df['NoP'].replace(['n'], 2, inplace=True)
-
-# %%
-# set target column, load and normalize data
-target_column = ['NoP']
-predictors = list(set(list(df.columns)) - set(target_column))
-
-# load scaler
-scaler = joblib.load('model/scaler.save')
-df[predictors] = scaler.fit_transform(df[predictors])
-df.describe()
-
+df =df_raw[['MSE', 'SSIM', 'Sound', 'Radar',"NoP", "MSE_MA", "SSIM_MA", "Sound_MA", "Radar_MA"]]
 # %%
 # load model
 model = keras.models.load_model('model/prehension_v1')
 
 # %%
-test = df.loc[20001]
+test = df.loc[11806]
 print(test['NoP'])
 test.drop(['NoP'], inplace=True)
 testinput = np.asarray(test).astype(np.float32)
@@ -51,4 +35,6 @@ testinput = np.asarray(test).astype(np.float32)
 probs = model.predict(np.array([testinput,]))
 answer = probs.argmax(axis=-1)
 print(probs, answer)
+# %%
+
 # %%
